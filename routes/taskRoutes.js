@@ -27,8 +27,7 @@ router.post('/', async (req, res) => {
       .catch((err) => res.status(500).json({ error: err }));
   }));
 
-  await Person.find()
-    .limit(1)
+  await Person.findOne()
     .then((person) => {
       if (!person) {
         res.status(404).json({
@@ -37,7 +36,7 @@ router.post('/', async (req, res) => {
         return;
       }
 
-      task.createdBy = person[0]._id;
+      task.createdBy = person._id;
     })
     .catch((err) => res.status(500).json({ error: err }));
 

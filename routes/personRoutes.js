@@ -25,6 +25,15 @@ router.get('/', async (req, res) => {
     .catch((err) => res.status(500).json({ error: err }));
 });
 
+// READ - Get all Developers
+router.get('/developers', async (req, res) => {
+  await Person.find({role: /dev/i})
+    .then((people) => {
+      res.status(200).json(people)
+    })
+    .catch((err) => res.status(500).json({ error: err }));
+});
+
 // READ - Get person by id
 router.get('/:id', async (req, res) => {
   await Person.findById(req.params.id)
