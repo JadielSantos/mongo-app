@@ -39,6 +39,30 @@ router.get('/:id', async (req, res) => {
     .catch((err) => res.status(500).json({ error: err }));
 });
 
+// READ - Get all assigned tasks for a person
+router.get('/:id/tasks', async (req, res) => {
+  await Person.findById(req.params.id)
+    .then((person) => {
+      if (!person) {
+        res.status(404).json({ error: 'Person not found' });
+        return;
+      }
+      
+      person
+        .listTasksAssignedTo()
+        .then((tasks) => {
+          if (!tasks) {
+            res.status(404).json({ error: 'Person has no assigned tasks' });
+            return;
+          }
+
+          res.status(200).json(tasks);
+        })
+        .catch((err) => res.status(500).json({ error: err }));
+    })
+    .catch((err) => res.status(500).json({ error: err }));
+});
+
 // UPDATE - Update person by id
 router.patch('/:id', async (req, res) => {
   await Person.updateOne({ _id: req.params.id }, req.body)
