@@ -52,7 +52,7 @@ router.get('/:id/tasks', async (req, res) => {
         .listTasksAssignedTo()
         .then((tasks) => {
           if (!tasks) {
-            res.status(404).json({ error: 'Person has no assigned tasks' });
+            res.status(404).json({ error: 'This Person has no assigned tasks' });
             return;
           }
 
