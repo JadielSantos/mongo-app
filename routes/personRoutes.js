@@ -18,10 +18,10 @@ router.post('/', async (req, res) => {
     .catch((err) => res.status(500).json({ error: err }));
 });
 
-// READ - Get all persons
+// READ - Get all people
 router.get('/', async (req, res) => {
   await Person.find()
-    .then((persons) => res.status(200).json(persons))
+    .then((people) => res.status(200).json(people))
     .catch((err) => res.status(500).json({ error: err }));
 });
 

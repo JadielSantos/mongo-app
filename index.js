@@ -9,9 +9,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // API routes
+const indexRoutes = require('./routes/indexRoutes');
 const personRoutes = require('./routes/personRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 
+app.use('/', indexRoutes);
 app.use('/api/person', personRoutes);
 app.use('/api/task', taskRoutes);
 

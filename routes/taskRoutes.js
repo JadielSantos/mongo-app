@@ -4,8 +4,8 @@ const Person = require('../models/Person');
 
 // CREATE - Create Task
 router.post('/', async (req, res) => {
-  const persons = req.body.assignedTo;
-  // Remove persons array from req.body
+  const people = req.body.assignedTo;
+  // Remove people array from req.body
   delete req.body.assignedTo;
   const task = new Task(req.body);
 
@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     return;
   }
 
-  await Promise.all(persons.map(async (person) => {
+  await Promise.all(people.map(async (person) => {
     await Person.findById(person)
       .then((person) => {
         if (!person || !person.active) {
